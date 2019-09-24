@@ -1,0 +1,45 @@
+<?php
+//model
+	require_once("connection.php");
+
+	class model
+	{
+		public function insert($tbl,$data,$con)
+		{
+			$k=array_keys($data);
+			$kk=implode($k,",");
+
+			$v=array_values($data);
+			$vv=implode($v," ',' ");
+
+			$ins="insert into $tbl ($kk) values ('$vv')";
+			$res=$con->query($ins) or die($ins);
+			return $res;
+		}
+
+		public function display($tbl,$data,$con)
+		{
+			$sel="select * from $tbl";
+			$res=$con->query($sel);
+			if($res==null)
+			{
+				return 0;
+			}
+			else
+			{
+				if($res->num_rows<1)
+				{
+					return 1;
+				}
+				else
+				{
+					while($dd=$res->fetch_object())
+					{
+						$arr[]=$dd;
+					}
+					return $arr;
+				}
+			}
+		}
+	}
+?>

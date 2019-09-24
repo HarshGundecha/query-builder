@@ -1,0 +1,11 @@
+<?php
+//connection
+	class connection
+	{
+		function connectToDB()
+		{
+			$con=new mysqli("localhost","root","","tempdb");
+			return $con;
+		}
+	}
+?>
